@@ -9,9 +9,15 @@
 <div class="type-{{ node.output_type }}">&nbsp;</div>
 {% endblock %}
 {% block content %}
-<h2>{{ library.name|capitalize }} Library: {{ node.name }}</h2>
-<p>{{ node.description}}</p>
 
+<div class="node-detail type-{{ node.output_type }}">
+    <h2><img class="node-image" src="{{ node.image_url }}">
+    <span class="node-name">{{ node.name}}</span>
+    <span class="node-type">{{ node.output_type }}</span></h2>
+    <div class="node-description">{{ node.description }}</div>
+</div>
+
+<h3>Ports</h3>
 <ul class="node-port-list">
 {% for port in node.ports %}
 <li class="type-{{ port.type }}">

@@ -28,7 +28,16 @@ header h1 {
    width: 940px;
    color: white;
    padding: 5px 20px;
- 
+}
+
+h2 {
+  font-size: 110%;
+}
+
+h3 {
+  font-size: 100%;
+  font-weight: bold;
+  color: #666;
 }
 
 #breadcrumbs {
@@ -89,6 +98,35 @@ header h1 {
    vertical-align: middle;
 }
 
+.node-detail .node-image {
+  margin: 0 10px 0 0;
+  width: 26px;
+  height: 26px;
+  vertical-align: middle;  
+}
+
+.node-detail {
+  width: 400px;
+  color: white;
+  margin: 0 0 10px 0;
+  border-radius: 4px;
+  padding: 5px;
+}
+
+.node-detail h2 {
+  margin: 0 0 10px 0;
+}
+
+.node-detail .node-type {
+   opacity: 0.6;
+   font-size: 80%;
+   vertical-align: baseline;
+}
+
+.node-detail .node-description {
+  padding-left: 42px;
+}
+
 .node-port-list {
    color: white;
    margin: 0;
@@ -96,7 +134,8 @@ header h1 {
 }
 
 .node-port-list li {
-   display: inline-block;
+   display: block;
+   width: 200px;
    margin: 0 0 10px 0;
    padding: 5px;
    border-radius: 4px;
