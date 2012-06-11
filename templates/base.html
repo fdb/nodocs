@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}{% endblock %} | NoDocs - NodeBox Documentation Generator</title>
+    <link rel="stylesheet" href="/static/screen.css" type="text/css" media="screen">
+</head>
+<body>
+<header>
+    <h1>NodeWeb</h1>
+</header>
+<div id="breadcrumbs">
+    {% block breadcrumbs %}{% endblock %}
+</div>
+<div id="node-type">{% block nodetype %}{% endblock %}</div>
+<div id="content">
+    {% block content %}{% endblock %}
+</div>
+</body>
+</html>

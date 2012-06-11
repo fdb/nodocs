@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}{{ library.name|capitalize }} Library{% endblock %}
+{% block breadcrumbs %}
+    <a href="/">Home</a> &raquo; 
+    {{ library.name}}
+{% endblock %}
+{% block content %}
+<h2>{{ library.name|capitalize }} Library</h2>
+<small>{{ library.description }}</small>
+<ul class="library-node-list">
+{% for node in library.nodes %}
+<li class="type-{{ node.output_type }}"><a href="/{{ library.name }}/{{ node.name }}" title="{{ node.description }}">
+    <img class="node-image" src="{{ node.image_url }}">
+    <span class="node-name">{{ node.name }}</span>
+</li>
+{% else %}
+<small>No nodes found.</small>
+{% endfor %}
+</ul>
+{% endblock %}

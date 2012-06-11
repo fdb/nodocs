@@ -1,0 +1,147 @@
+* {
+   box-sizing: border-box;
+}
+
+body {
+   font-family: helvetica,arial,sans-serif;
+   background: #ddd;
+   margin: 0;
+   padding: 0;
+}
+
+a {
+   text-decoration: none;
+   color: #66f;
+}
+
+small {
+   color: #666;
+}
+
+header {
+   background: #300;
+   border-bottom: 1px solid #800;
+}
+
+header h1 {
+   margin: 0 auto;
+   width: 940px;
+   color: white;
+   padding: 5px 20px;
+ 
+}
+
+#breadcrumbs {
+   width: 940px;
+   margin: 10px auto;
+   padding: 0 20px;
+   color: #666;
+   font-size: 80%;
+   background: white;
+   padding: 10px 20px;
+}
+
+#node-type {
+  width: 940px;
+  margin: 0 auto;
+  height: 4px;
+}
+
+#content {
+   width: 940px;
+   margin: 0 auto 10px auto;
+   background: white;
+   padding: 10px 20px;
+}
+
+.library-node-list {
+   margin: 0;
+   padding: 0;
+}
+
+.library-node-list li {
+   display: inline-block;
+   padding: 5px;
+   margin: 0 0 5px 0;
+   border-radius: 4px;
+   font-size: 80%;
+   width: 200px;
+}
+
+.library-node-list li a {
+   font-weight: bold;
+   color: white;
+}
+
+.library-node-list .node-name {
+  font-size: 90%;
+  display: inline-block;
+  width: 125px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.library-node-list .node-image {
+   margin: 0 10px 0 0;
+   width: 26px;
+   height: 26px;
+   vertical-align: middle;
+}
+
+.node-port-list {
+   color: white;
+   margin: 0;
+   padding: 0;
+}
+
+.node-port-list li {
+   display: inline-block;
+   margin: 0 0 10px 0;
+   padding: 5px;
+   border-radius: 4px;
+}
+
+.node-port-list .port-type {
+   opacity: 0.6;
+   font-size: 80%;
+   vertical-align: baseline;
+}
+
+.type-int {
+   background: #575855;
+}
+
+.type-float {
+   background: #575855;
+}
+
+.type-string {
+   background: #353d3f;
+}
+
+.type-boolean {
+   background: #222222;
+}
+
+.type-color {
+   background: #ffbd4f;
+}
+
+.type-geometry {
+   background: #ff9501;
+}
+
+.type-point {
+   background: #31b8d5;
+}
+
+
+.type-list {
+   background: #0092db;
+}
+
+.type-None {
+   /* These nodes have no type set. Mark them as an error! */
+   background: red;
+}

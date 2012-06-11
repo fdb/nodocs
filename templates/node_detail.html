@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}{{ library.name|capitalize }} Library: {{ node.name }}{% endblock %}
+{% block breadcrumbs %}
+    <a href="/">Home</a> &raquo; 
+    <a href="{{ library.absolute_url }}">{{ library.name}}</a> &raquo;
+    {{ node.name }}
+{% endblock %}
+{% block nodetype %}
+<div class="type-{{ node.output_type }}">&nbsp;</div>
+{% endblock %}
+{% block content %}
+<h2>{{ library.name|capitalize }} Library: {{ node.name }}</h2>
+<p>{{ node.description}}</p>
+
+<ul class="node-port-list">
+{% for port in node.ports %}
+<li class="type-{{ port.type }}">
+    <span class="port-name">{{ port.name }}</span>
+    <span class="port-type">{{ port.type }}</span>
+</li>
+{% else %}
+<small>No ports.</small>
+{% endfor %}
+</ul>
+
+
+{% endblock %}

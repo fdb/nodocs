@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}All Libraries{% endblock %}
+{% block breadcrumbs %}
+Home
+{% endblock %}
+{% block content %}
+<h2>All Libraries</h2>
+{% for library in libraries %}
+<ul>
+    <li><a href="{{ library.absolute_url }}">{{ library.name }}</a>: {{ library.description }}</li>
+
+</ul>
+{% endfor %}
+
+{% endblock %}

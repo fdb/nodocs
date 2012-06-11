@@ -1,0 +1,8 @@
+# Ignore Mac hidden files
+.DS_Store
+
+# Ignore virtualenv
+.Python
+bin
+include
+lib
