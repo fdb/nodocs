@@ -5,7 +5,8 @@ from xml.etree import ElementTree
 
 GITHUB_BRANCH_NAME = 'vertical-network-view'
 NODOCS_ROOT = os.path.dirname(os.path.abspath(__file__))
-NODE_LIBRARIES_DIRECTORY = os.path.join('..', 'nodebox', 'libraries')
+SOURCE_ROOT = os.path.dirname(NODOCS_ROOT)
+NODE_LIBRARIES_DIRECTORY = os.path.join(SOURCE_ROOT, 'nodebox', 'libraries')
 
 app = Flask(__name__)
 
