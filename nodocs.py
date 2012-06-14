@@ -108,8 +108,9 @@ def parse_library(library_name):
     library.nodes =  nodes
     return library
 
+# Global setup
+library_directories = glob(os.path.join(NODE_LIBRARIES_DIRECTORY, '*'))
+all_libraries = [Library.from_directory(dirname) for dirname in library_directories]
+
 if __name__=='__main__':
-    global all_libraries
-    library_directories = glob(os.path.join(NODE_LIBRARIES_DIRECTORY, '*'))
-    all_libraries = [Library.from_directory(dirname) for dirname in library_directories]
     app.run(host='0.0.0.0', debug=True)
