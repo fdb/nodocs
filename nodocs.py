@@ -4,7 +4,8 @@ from flask import Flask, render_template, redirect, url_for, request
 from xml.etree import ElementTree
 
 GITHUB_BRANCH_NAME = 'vertical-network-view'
-NODE_LIBRARIES_DIRECTORY = '../nodebox/libraries'
+NODOCS_ROOT = os.path.dirname(os.path.abspath(__file__))
+NODE_LIBRARIES_DIRECTORY = os.path.join('..', 'nodebox', 'libraries')
 
 app = Flask(__name__)
 
