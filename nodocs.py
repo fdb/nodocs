@@ -1,4 +1,5 @@
 import os.path
+from glob import glob
 from flask import Flask, render_template, redirect, url_for, request
 from xml.etree import ElementTree
 
@@ -8,9 +9,21 @@ NODE_LIBRARIES_DIRECTORY = '../nodebox/libraries'
 app = Flask(__name__)
 
 class Library(object):
-    def __init__(self, name, description):
+
+    @classmethod
+    def from_directory(cls, dirname):
+        library_name = os.path.basename(dirname)
+        library_fname = os.path.join(dirname, '%s.ndbx' % library_name)
+        library = Library(library_name)
+        et = ElementTree.parse(open(library_fname))
+        root_node = et.find('node')
+        library.description = root_node.attrib.get('description', 'No description')
+        nodes = [Node.from_element(library, e) for e in root_node.findall('node')]
+        library.nodes =  nodes
+        return library
+
+    def __init__(self, name):
         self.name = name
-        self.description = description
 
     @property
     def absolute_url(self):
@@ -68,18 +81,6 @@ class Port(object):
         self.node = node
         self.name = name
 
-all_libraries = [
-    Library('color', 'Color'),
-    Library('core', 'Core'),
-    Library('coreimage', 'Image processing'),
-    Library('corevector', 'Vector generation and filtering'),
-    Library('data', 'Data manipulation'),
-    Library('l_system', 'Tree generation using L-systems'),
-    Library('list', 'Generic list processing'),
-    Library('math', 'Generic math operations'),
-    Library('packing', 'Geometric packing'),
-    Library('string', 'String manipulation')]
-
 @app.route('/')
 def index():
     return render_template('library_list.html', libraries=all_libraries)
@@ -100,11 +101,14 @@ def node_detail(library_name, node_name):
     return render_template('node_detail.html', library=library, node=node)
 
 def parse_library(library_name):
-    library = Library(library_name, '')
+    library = Library(library_name)
     et = ElementTree.parse(open(library.file))
     nodes = [Node.from_element(library, e) for e in et.find('node').findall('node')]
     library.nodes =  nodes
     return library
 
 if __name__=='__main__':
+    global all_libraries
+    library_directories = glob(os.path.join(NODE_LIBRARIES_DIRECTORY, '*'))
+    all_libraries = [Library.from_directory(dirname) for dirname in library_directories]
     app.run(host='0.0.0.0', debug=True)
