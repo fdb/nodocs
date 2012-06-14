@@ -147,40 +147,52 @@ h3 {
    vertical-align: baseline;
 }
 
-.type-int {
-   background: #575855;
+.type-int, .type-int a .node-name {
+   background: #dcdee3;
+   color: #333;
 }
 
-.type-float {
-   background: #575855;
+.type-float, .type-float a .node-name {
+   background: #dcdee3;
+   color: #333;
 }
 
-.type-string {
-   background: #353d3f;
+.type-string, .type-string a .node-name {
+   background: #bdb9ba;
+   color: #333;
 }
 
-.type-boolean {
-   background: #222222;
+.type-boolean, .type-boolean a .node-name {
+   background: #ffffff;
+   color: #333;
 }
 
-.type-color {
+.type-color, .type-color a .node-name {
    background: #ffbd4f;
 }
 
-.type-geometry {
-   background: #ff9501;
+.type-geometry, .type-geometry a .node-name {
+   background: #000;
+   color: #7196b1;
 }
 
-.type-point {
-   background: #31b8d5;
+.type-image, .type-image a .node-name {
+  background: #000;
+  color: #598a6d;
+}
+
+.type-point, .type-point a .node-name {
+   background: #b8e0f8;
+   color: #333;
 }
 
 
-.type-list {
-   background: #0092db;
+.type-list, .type-list a .node-name {
+   background: #6499bc;
+   color: #eee;
 }
 
-.type-None {
+.type-None, .type-None a .node-name {
    /* These nodes have no type set. Mark them as an error! */
    background: red;
 }
