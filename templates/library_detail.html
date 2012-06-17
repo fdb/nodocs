@@ -6,7 +6,7 @@
 {% endblock %}
 {% block content %}
 <h2>{{ library.name|capitalize }} Library</h2>
-<small>{{ library.description }}</small>
+<p><small>{{ library.description }}</small></p>
 <ul class="library-node-list">
 {% for node in library.nodes %}
 <li class="type-{{ node.output_type }}"><a href="/{{ library.name }}/{{ node.name }}" title="{{ node.description }}">

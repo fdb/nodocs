@@ -186,9 +186,13 @@ h3 {
    color: #333;
 }
 
-
 .type-list, .type-list a .node-name {
    background: #6499bc;
+   color: #eee;
+}
+
+.type-data, .type-data a .node-name {
+   background: #496694;
    color: #eee;
 }
 
