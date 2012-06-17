@@ -28,8 +28,9 @@ class Library(object):
         et = ElementTree.parse(open(library_fname))
         root_node = et.find('node')
         library.description = root_node.attrib.get('description', 'No description')
-        nodes = [Node.from_element(library, e) for e in root_node.findall('node')]
-        library.nodes =  nodes
+        # Can't use a list comprehension here since we need prototype nodes to be available in self.nodes.
+        for e in root_node.findall('node'):
+            library.nodes.append(Node.from_element(library, e))
         return library
 
     @classmethod
@@ -38,6 +39,7 @@ class Library(object):
 
     def __init__(self, name):
         self.name = name
+        self.nodes = []
 
     @property
     def absolute_url(self):
@@ -59,11 +61,11 @@ class Node(object):
     @classmethod
     def from_element(cls, library, e):
         n = Node(library, e.attrib['name'])
+        n.prototype = library.find_node(e.attrib.get('prototype'))
         n.description = e.attrib.get('description')
         n.function = e.attrib.get('function')
         n.image = e.attrib.get('image')
-        n.output_type = e.attrib.get('outputType')
-        n.prototype = e.attrib.get('prototype')
+        n.output_type = e.attrib.get('outputType', n.prototype and n.prototype.output_type)
         n.ports = [Port.from_element(n.name, pe) for pe in e.findall('port')]
         return n
     
