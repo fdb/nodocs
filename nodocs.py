@@ -10,6 +10,14 @@ NODE_LIBRARIES_DIRECTORY = os.path.join(SOURCE_ROOT, 'nodebox', 'libraries')
 
 app = Flask(__name__)
 
+def _find_by_name(objects, name):
+    """Find an object in the list of objects that has a name attribute that matches the given name."""
+    matching_objects = [o for o in objects if o.name == name]
+    if len(matching_objects) == 1:
+        return matching_objects[0]
+    else:
+        return None
+
 class Library(object):
 
     @classmethod
@@ -23,6 +31,10 @@ class Library(object):
         nodes = [Node.from_element(library, e) for e in root_node.findall('node')]
         library.nodes =  nodes
         return library
+
+    @classmethod
+    def find(cls, name):
+        return _find_by_name(all_libraries, name)
 
     def __init__(self, name):
         self.name = name
@@ -40,12 +52,8 @@ class Library(object):
         return os.path.join(self.directory, '%s.ndbx' % self.name)
         
     def find_node(self, name):
-        matching_nodes = [node for node in self.nodes if node.name == name]
-        if len(matching_nodes) == 1:
-            return matching_nodes[0]
-        else:
-            return None
-            
+        return _find_by_name(self.nodes, name)
+
 class Node(object):
     
     @classmethod
@@ -93,21 +101,14 @@ def favicon():
 
 @app.route('/<library_name>')
 def library_detail(library_name):
-    library = parse_library(library_name)
+    library = Library.find(library_name)
     return render_template('library_detail.html', library=library)
 
 @app.route('/<library_name>/<node_name>')
 def node_detail(library_name, node_name):
-    library = parse_library(library_name)
+    library = Library.find(library_name)
     node = library.find_node(node_name)
     return render_template('node_detail.html', library=library, node=node)
-
-def parse_library(library_name):
-    library = Library(library_name)
-    et = ElementTree.parse(open(library.file))
-    nodes = [Node.from_element(library, e) for e in et.find('node').findall('node')]
-    library.nodes =  nodes
-    return library
 
 # Global setup
 library_directories = glob(os.path.join(NODE_LIBRARIES_DIRECTORY, '*'))
