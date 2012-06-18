@@ -82,6 +82,12 @@ h3 {
    color: white;
 }
 
+.library-node-list li.slow-node {
+    background-image: url(/static/slow-node.png);
+    background-repeat: no-repeat;
+    background-position: 98% 50%;
+}
+
 .library-node-list .node-name {
   font-size: 90%;
   display: inline-block;

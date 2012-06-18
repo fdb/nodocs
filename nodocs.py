@@ -64,6 +64,7 @@ class Node(object):
         n.prototype = library.find_node(e.attrib.get('prototype'))
         n.description = e.attrib.get('description')
         n.function = e.attrib.get('function')
+        n.slow = n.function is not None and n.function.startswith('py')
         n.image = e.attrib.get('image')
         n.output_type = e.attrib.get('outputType', n.prototype and n.prototype.output_type)
         n.ports = [Port.from_element(n.name, pe) for pe in e.findall('port')]

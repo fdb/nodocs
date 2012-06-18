@@ -9,7 +9,7 @@
 <p><small>{{ library.description }}</small></p>
 <ul class="library-node-list">
 {% for node in library.nodes %}
-<li class="type-{{ node.output_type }}"><a href="/{{ library.name }}/{{ node.name }}" title="{{ node.description }}">
+<li class="type-{{ node.output_type }}{% if node.slow %} slow-node{% endif %}"><a href="/{{ library.name }}/{{ node.name }}" title="{{ node.description }}">
     <img class="node-image" src="{{ node.image_url }}">
     <span class="node-name">{{ node.name }}</span>
 </li>
