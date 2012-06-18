@@ -114,7 +114,7 @@ h3 {
 }
 
 .node-detail h2 {
-  margin: 0 0 10px 0;
+  margin: 0 0 0 0;
 }
 
 .node-detail .node-type {
@@ -123,8 +123,16 @@ h3 {
    vertical-align: baseline;
 }
 
-.node-detail .node-description {
+.node-detail .node-description, .node-detail .node-function {
   padding-left: 42px;
+}
+
+.node-detail .node-function {
+  font-size: 80%;
+  opacity: 0.9;
+  position: relative;
+  top: -2px;
+  margin-bottom: 1em;
 }
 
 .node-port-list {
