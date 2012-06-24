@@ -1,6 +1,10 @@
 # Ignore Mac hidden files
 .DS_Store
 
+# Ignore Python compiled files
+*.pyc
+*.pyo
+
 # Ignore virtualenv
 .Python
 bin
