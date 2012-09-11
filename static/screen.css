@@ -161,53 +161,48 @@ h3 {
    vertical-align: baseline;
 }
 
+a .node-name {
+  color: white;
+}
+
 .type-int, .type-int a .node-name {
-   background: #dcdee3;
-   color: #333;
+   background: rgb(116, 119, 121);
 }
 
 .type-float, .type-float a .node-name {
-   background: #dcdee3;
-   color: #333;
+   background: rgb(116, 119, 121);
 }
 
 .type-string, .type-string a .node-name {
-   background: #bdb9ba;
-   color: #333;
+   background: rgb(92, 90, 91);
 }
 
 .type-boolean, .type-boolean a .node-name {
-   background: #ffffff;
-   color: #333;
+   background: rgb(92, 90, 91);
 }
 
 .type-color, .type-color a .node-name {
-   background: #ffbd4f;
+   background: rgb(92, 90, 91);
 }
 
 .type-geometry, .type-geometry a .node-name {
-   background: #000;
-   color: #7196b1;
+   background: rgb(20, 20, 20);
 }
 
 .type-image, .type-image a .node-name {
   background: #000;
-  color: #598a6d;
 }
 
 .type-point, .type-point a .node-name {
-   background: #b8e0f8;
-   color: #333;
+   background: rgb(119, 154, 173);
 }
 
 .type-list, .type-list a .node-name {
-   background: #6499bc;
-   color: #eee;
+   background: rgb(76, 137, 174);
 }
 
 .type-data, .type-data a .node-name {
-   background: #496694;
-   color: #eee;
+   background: rgb(52, 85, 129);
 }
 
 .type-None, .type-None a .node-name {
