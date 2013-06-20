@@ -22,6 +22,26 @@ def _find_by_name(objects, name):
         return None
 
 
+class JavaScriptLibrary(object):
+
+    @classmethod
+    def from_file(cls, fname):
+        source = open(fname).read()
+        return JavaScriptLibrary(fname, source)
+
+    def __init__(self, fname, source):
+        self.fname = fname
+        self.source = source
+
+    def contains_function(self, functionId):
+        ns, fn = functionId.split('/')
+        jsId = '%s.%s' % (ns, fn)
+        if jsId in self.source:
+            return True
+        else:
+            return False
+
+
 class Library(object):
     @classmethod
     def from_directory(cls, dirname):
@@ -29,6 +49,10 @@ class Library(object):
         library_fname = os.path.join(dirname, '%s.ndbx' % library_name)
         library = Library(library_name)
         et = ElementTree.parse(open(library_fname))
+        for e in et.findall('link'):
+            language, fname = e.attrib['href'].split(':')
+            if language == 'javascript':
+                library.modules.append(JavaScriptLibrary.from_file(os.path.join(dirname, fname)))
         root_node = et.find('node')
         library.description = root_node.attrib.get('description', 'No description')
         # Can't use a list comprehension here since we need prototype nodes to be available in self.nodes.
@@ -43,6 +67,7 @@ class Library(object):
     def __init__(self, name):
         self.name = name
         self.nodes = []
+        self.modules = []
 
     @property
     def absolute_url(self):
@@ -56,6 +81,24 @@ class Library(object):
     def file(self):
         return os.path.join(self.directory, '%s.ndbx' % self.name)
 
+    def contains_function(self, functionId):
+        for m in self.modules:
+            if m.contains_function(functionId):
+                return True
+        return False
+
+    @property
+    def all_nodes_count(self):
+        return len(self.nodes)
+
+    @property
+    def javascript_nodes_count(self):
+        return len([n for n in self.nodes if n.javascript_implementation])
+
+    @property
+    def javascript_progress(self):
+        return round((self.javascript_nodes_count/ float(self.all_nodes_count)) * 100)
+
     def find_node(self, name):
         return _find_by_name(self.nodes, name)
 
@@ -67,6 +110,7 @@ class Node(object):
         n.prototype = library.find_node(e.attrib.get('prototype'))
         n.description = e.attrib.get('description')
         n.function = e.attrib.get('function')
+        n.javascript_implementation = library.contains_function(n.function)
         n.slow = n.function is not None and n.function.startswith('py')
         n.image = e.attrib.get('image')
         n.output_type = e.attrib.get('outputType', n.prototype and n.prototype.output_type)

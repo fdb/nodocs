@@ -1,20 +1,31 @@
 {% extends "base.html" %}
 {% block title %}{{ library.name|capitalize }} Library{% endblock %}
 {% block breadcrumbs %}
-    <a href="/">Home</a> &raquo; 
-    {{ library.name}}
+    <a href="/">Home</a> &raquo;
+    {{ library.name }}
 {% endblock %}
 {% block content %}
-<h2>{{ library.name|capitalize }} Library</h2>
-<p><small>{{ library.description }}</small></p>
-<ul class="library-node-list">
-{% for node in library.nodes %}
-<li class="type-{{ node.output_type }}{% if node.slow %} slow-node{% endif %}"><a href="/{{ library.name }}/{{ node.name }}" title="{{ node.description }}">
-    <img class="node-image" src="{{ node.image_url }}">
-    <span class="node-name">{{ node.name }}</span>
-</li>
-{% else %}
-<small>No nodes found.</small>
-{% endfor %}
-</ul>
+    <h2>{{ library.name|capitalize }} Library</h2>
+    <p>
+        <small>{{ library.description }}</small>
+    </p>
+    <p>JavaScript porting progress:
+    <span class="meter-wrap">
+        <span class="meter-value" style="width: {{ library.javascript_progress }}%"></span>
+    </span>
+    {{  library.javascript_progress }}%
+    <small>({{ library.javascript_nodes_count }} of {{ library.all_nodes_count }} nodes)</small>
+    </p>
+    <ul class="library-node-list">
+        {% for node in library.nodes %}
+            <li class="type-{{ node.output_type }}{% if node.slow %} slow-node{% endif %}"><a
+                    href="/{{ library.name }}/{{ node.name }}" title="{{ node.description }}">
+                {%  if node.javascript_implementation %}<span class="js">JS</span>{%  endif %}
+                <img class="node-image" src="{{ node.image_url }}">
+                <span class="node-name">{{ node.name }}</span>
+            </li>
+        {% else %}
+            <small>No nodes found.</small>
+        {% endfor %}
+    </ul>
 {% endblock %}

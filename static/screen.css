@@ -63,6 +63,25 @@ h3 {
    padding: 10px 20px;
 }
 
+.meter-wrap {
+    display: inline-block;
+    width: 200px;
+    position: relative;
+    top: 1px;
+    background: lightgrey;
+    height: 12px;
+    border-radius: 3px;
+}
+
+.meter-value {
+    display: inline-block;
+    background: rgb(119, 154, 173);
+    height: 12px;
+    position: relative;
+    top: -2px;
+    border-radius: 3px;
+}
+
 .library-node-list {
    margin: 0;
    padding: 0;
@@ -88,6 +107,13 @@ h3 {
     background-position: 98% 50%;
 }
 
+.library-node-list span.js {
+    color: white;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+    float: right;
+    padding-top: 4px;
+}
+
 .library-node-list .node-name {
   font-size: 90%;
   display: inline-block;
@@ -108,7 +134,7 @@ h3 {
   margin: 0 10px 0 0;
   width: 26px;
   height: 26px;
-  vertical-align: middle;  
+  vertical-align: middle;
 }
 
 .node-detail {
