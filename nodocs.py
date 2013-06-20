@@ -1,7 +1,9 @@
-import os.path
 from glob import glob
-from flask import Flask, render_template, redirect, url_for, request
 from xml.etree import ElementTree
+
+import os.path
+from flask import Flask, render_template
+
 
 GITHUB_BRANCH_NAME = 'master'
 NODOCS_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -9,6 +11,7 @@ SOURCE_ROOT = os.path.dirname(NODOCS_ROOT)
 NODE_LIBRARIES_DIRECTORY = os.path.join(SOURCE_ROOT, 'nodebox', 'libraries')
 
 app = Flask(__name__)
+
 
 def _find_by_name(objects, name):
     """Find an object in the list of objects that has a name attribute that matches the given name."""
@@ -18,8 +21,8 @@ def _find_by_name(objects, name):
     else:
         return None
 
-class Library(object):
 
+class Library(object):
     @classmethod
     def from_directory(cls, dirname):
         library_name = os.path.basename(dirname)
@@ -52,12 +55,12 @@ class Library(object):
     @property
     def file(self):
         return os.path.join(self.directory, '%s.ndbx' % self.name)
-        
+
     def find_node(self, name):
         return _find_by_name(self.nodes, name)
 
+
 class Node(object):
-    
     @classmethod
     def from_element(cls, library, e):
         n = Node(library, e.attrib['name'])
@@ -69,43 +72,48 @@ class Node(object):
         n.output_type = e.attrib.get('outputType', n.prototype and n.prototype.output_type)
         n.ports = [Port.from_element(n.name, pe) for pe in e.findall('port')]
         return n
-    
+
     def __init__(self, library, name):
         self.library = library
         self.name = name
-        
+
     @property
     def image_url(self):
         if self.image is not None:
-            return 'http://github.com/nodebox/nodebox/raw/%s/libraries/%s/%s' % (GITHUB_BRANCH_NAME, self.library.name, self.image)
+            return 'http://github.com/nodebox/nodebox/raw/%s/libraries/%s/%s' % \
+                   (GITHUB_BRANCH_NAME, self.library.name, self.image)
         else:
             return 'http://placehold.it/26x26'
-        
+
+
 class Port(object):
-    
     @classmethod
     def from_element(cls, node, e):
         p = Port(node, e.attrib['name'])
         p.type = e.attrib.get('type')
         p.value = e.attrib.get('value')
         return p
-        
+
     def __init__(self, node, name):
         self.node = node
         self.name = name
 
+
 @app.route('/')
 def index():
     return render_template('library_list.html', libraries=all_libraries)
-    
+
+
 @app.route('/favicon.ico')
 def favicon():
     return ''
+
 
 @app.route('/<library_name>')
 def library_detail(library_name):
     library = Library.find(library_name)
     return render_template('library_detail.html', library=library)
+
 
 @app.route('/<library_name>/<node_name>')
 def node_detail(library_name, node_name):
@@ -113,9 +121,10 @@ def node_detail(library_name, node_name):
     node = library.find_node(node_name)
     return render_template('node_detail.html', library=library, node=node)
 
+
 # Global setup
 library_directories = glob(os.path.join(NODE_LIBRARIES_DIRECTORY, '*'))
 all_libraries = [Library.from_directory(dirname) for dirname in library_directories]
 
-if __name__=='__main__':
+if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
