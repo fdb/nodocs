@@ -5,7 +5,7 @@ import os.path
 from flask import Flask, render_template
 
 
-GITHUB_BRANCH_NAME = 'master'
+GITHUB_BRANCH_NAME = 'javascript-export'
 NODOCS_ROOT = os.path.dirname(os.path.abspath(__file__))
 SOURCE_ROOT = os.path.dirname(NODOCS_ROOT)
 NODE_LIBRARIES_DIRECTORY = os.path.join(SOURCE_ROOT, 'nodebox', 'libraries')
