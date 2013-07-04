@@ -5,10 +5,22 @@ Home
 {% endblock %}
 {% block content %}
 <h2>All Libraries</h2>
+<table>
 {% for library in libraries %}
-<ul>
-    <li><a href="{{ library.absolute_url }}">{{ library.name }}</a>: {{ library.description }}</li>
-</ul>
+    <tr>
+        <td>
+            <a href="{{ library.absolute_url }}">{{ library.name }}</a>:
+            {{ library.description }}
+        </td>
+        <td>
+            <span class="meter-wrap">
+                <span class="meter-value" style="width: {{ library.javascript_progress }}%"></span>
+            </span>
+            {{  library.javascript_progress }}%
+            <small>({{ library.javascript_nodes_count }} of {{ library.all_nodes_count }} nodes)</small>
+        </td>
+    </tr>
 {% endfor %}
+</table>
 
 {% endblock %}

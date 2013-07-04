@@ -18,6 +18,22 @@ small {
    color: #666;
 }
 
+table {
+  border-collapse: collapse;
+}
+
+table td {
+  padding: 15px;
+}
+
+table tr {
+  border-bottom: 1px solid #eee;
+}
+
+table tr:last-child {
+  border-bottom: none;
+}
+
 header {
    background: #300;
    border-bottom: 1px solid #800;
