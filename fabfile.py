@@ -1,6 +1,6 @@
 from fabric.api import env, run, cd, local
 
-env.hosts = ['root@nodocs.nodebox.net']
+env.hosts = ['emrg@nodocs.nodebox.net']
 
 
 def server():
@@ -24,4 +24,3 @@ def deploy():
 def all():
     update()
     deploy()
-
