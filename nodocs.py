@@ -38,6 +38,10 @@ class JavaScriptLibrary(object):
         jsId = '%s.%s' % (ns, fn)
         if jsId in self.source:
             return True
+        elif ns == 'pyvector':
+            # HACK also check for corevector.
+            jsId = 'corevector.%s' % fn
+            return jsId in self.source
         else:
             return False
 
