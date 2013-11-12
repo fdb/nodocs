@@ -128,7 +128,7 @@ class Node(object):
     @property
     def image_url(self):
         if self.image is not None:
-            return 'http://github.com/nodebox/nodebox/raw/%s/libraries/%s/%s' % \
+            return 'http://github.com/nodebox/nodebox/raw/%s/libraries/%s/icons/%s' % \
                    (GITHUB_BRANCH_NAME, self.library.name, self.image)
         else:
             return 'http://placehold.it/26x26'
