@@ -52,7 +52,7 @@ class Library(object):
         for e in et.findall('link'):
             language, fname = e.attrib['href'].split(':')
             if language == 'javascript':
-                library.modules.append(JavaScriptLibrary.from_file(os.path.join(dirname, fname)))
+                library.modules.append(JavaScriptLibrary.from_file(os.path.join(dirname, 'code', 'javascript', fname)))
         root_node = et.find('node')
         library.description = root_node.attrib.get('description', 'No description')
         # Can't use a list comprehension here since we need prototype nodes to be available in self.nodes.
